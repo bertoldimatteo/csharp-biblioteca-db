@@ -1,22 +1,41 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Runtime.InteropServices;
+using System.Data.SqlClient;
 
-Library library = new Library();
+string stringaDiConnessione = "Data Source=localhost;Initial Catalog=biblioteca-db;Integrated Security=True";
 
-Book firstBook = new Book(123456789, "L'arte della guerra");
-firstBook.pages = 200;
+SqlConnection connessioneSql = new SqlConnection(stringaDiConnessione);
 
-Movie firstMovie = new Movie(123456789, "Star Wars L'impero colpisce ancora");
-firstMovie.minute = 150;
+try
+{
+    connessioneSql.Open();
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.ToString());
+}
+finally
+{
+    connessioneSql.Close();
+}
 
-Console.WriteLine(firstBook.title);
-Console.WriteLine(firstMovie.title);
+//using System.Runtime.InteropServices;
 
-User userRegistered = new User("Mario", "Rossi", "mail@mail.com", "lamiapassword123", 123456789);
-User userAnonimous = new User("null", "null", "null", "null", 123456789);
+//Library library = new Library();
 
-library.newUser(userRegistered);
+//Book firstBook = new Book(123456789, "L'arte della guerra");
+//firstBook.pages = 200;
 
-List<Document> risultati = library.searchElements("guerra");
-Console.WriteLine(risultati[0].title);
+//Movie firstMovie = new Movie(123456789, "Star Wars L'impero colpisce ancora");
+//firstMovie.minute = 150;
+
+//Console.WriteLine(firstBook.title);
+//Console.WriteLine(firstMovie.title);
+
+//User userRegistered = new User("Mario", "Rossi", "mail@mail.com", "lamiapassword123", 123456789);
+//User userAnonimous = new User("null", "null", "null", "null", 123456789);
+
+//library.newUser(userRegistered);
+
+//List<Document> risultati = library.searchElements("guerra");
+//Console.WriteLine(risultati[0].title);
