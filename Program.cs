@@ -6,15 +6,6 @@ string stringaDiConnessione = "Data Source=localhost;Initial Catalog=biblioteca-
 
 Library library = new Library();
 
-Book firstBook = new Book(123456789, "L'arte della guerra");
-firstBook.pages = 200;
-
-Movie firstMovie = new Movie(123456789, "Star Wars L'impero colpisce ancora");
-firstMovie.minute = 150;
-
-Console.WriteLine(firstBook.title);
-Console.WriteLine(firstMovie.title);
-
 User userRegistered = new User("Mario", "Rossi", "mail@mail.com", "lamiapassword123", 123456789);
 User userAnonimous = new User("null", "null", "null", "null", 123456789);
 
@@ -26,15 +17,23 @@ try
 {
     connessioneSql.Open();
 
-}
+    string queryBook = "INSERT INTO Libro (ISBN, titolo, autore, pagine) VALUES ()";
+
+    SqlCommand cmd = new SqlCommand(queryBook, connessioneSql);
+    cmd.Parameters.Add(new SqlParameter("@ISBN", "5555555"));
+    cmd.Parameters.Add(new SqlParameter("@titolo", "Star Wars"));
+    cmd.Parameters.Add(new SqlParameter("@autore", "George Lucas"));
+    cmd.Parameters.Add(new SqlParameter("@pagine", "500"));
+
+}   
 catch (Exception ex)
-{
-    Console.WriteLine(ex.ToString());
-}
-finally
-{
-    connessioneSql.Close();
-}
+    {
+        Console.WriteLine(ex.ToString());
+    }
+    finally
+    {
+        connessioneSql.Close();
+    }
 
 //using System.Runtime.InteropServices;
 
